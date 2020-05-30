@@ -1,9 +1,16 @@
 package Week_02_everyday_test
 
 import (
-    "fmt"
-    "testing"
+	"fmt"
+	"testing"
 )
+
+//https://leetcode-cn.com/problems/sliding-window-maximum/
+//【题意】
+//给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+//
+//返回滑动窗口中的最大值。
+//
 
 //{1,3,-1,-3,5,3,6,7}
 
@@ -15,83 +22,34 @@ import (
 //4 = len - 2
 //...
 //8 = 1
-// len - (k - 2) 层 / 个桶
+// len - k + 1 层 / 个桶
 
-//[0,1] [1,2] [2,3] [3,4] [4,5] [5,6] [6,7] [7,8]
+//【解法1】暴力求解
 func maxSlidingWindow(nums []int, k int) []int {
-    res := []int{}
-    if len(nums) < k {
-        return res
-    }
-    if k == 1 || k == len(nums) {
-        return nums
-    }
-    t := len(nums) - (k - 2)
-    temp_ := make([][]int, t)
-
-
-    fmt.Println(temp_)
-return  res
+	res := []int{}
+	if len(nums) < k {
+		return res
+	}
+	if k == 1 {
+		return nums
+	}
+	t := len(nums) - k + 1
+	for i := 0; i < t; i++ {
+		max := 0
+		for j := i; j < i+k; j++ {
+			if nums[j] > max {
+				max = nums[j]
+			}
+		}
+		res = append(res, max)
+	}
+	return res
 }
 
+//【解法2】双端队列
 
-
-
-//0,1
-//1,2
-//2,3
-//3,4
-//4,5
-//5,6
-//6,7
-//7,8
-//2-8
-
-//0,1,2
-//1,2,3
-//2,3,4
-//3,4,5
-//4,5,6
-//5,6,7
-//6,7,8
-//3-7
-
-//0,1,2,3
-//1,2,3,4
-//2,3,4,5
-//3,4,5,6
-//4,5,6,7
-//5,6,7,8
-//4-6
-
-//0,1,2,3,4
-//1,2,3,4,5
-//2,3,4,5,6
-//3,4,5,6,7
-//4,5,6,7,8
-//5-5
-
-
-//func maxSlidingWindow(nums []int, k int) []int {
-//    res := []int{}
-//    if len(nums) < k {
-//        return res
-//    }
-//    if k == 1 || k == len(nums) {
-//        return nums
-//    }
-//    temp_arr1 := [][]int{}
-//    temp_arr2 := []int{}
-//    for i:=0; i<k ; i++  {
-//
-//
-//    }
-//    fmt.Println(temp_arr1)
-//    return res
-//}
-
-func TestMaxSl(t *testing.T)  {
-    nums := []int{1,3,-1,-3,5,3,6,7}
-    k := 3
-    fmt.Println(maxSlidingWindow(nums, k))
+func TestMaxSl(t *testing.T) {
+	nums := []int{1, 3, -1, -3, 5, 3, 6, 7}
+	k := 3
+	fmt.Println(maxSlidingWindow(nums, k))
 }
