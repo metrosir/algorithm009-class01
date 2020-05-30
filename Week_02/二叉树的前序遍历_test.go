@@ -20,7 +20,7 @@ import (
 //
 //输出: [1,2,3]
 
-type TreeNode struct {
+type TreeNode_ struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode

@@ -1,8 +1,8 @@
 package Week_02_test
 
 import (
-    "fmt"
-    "testing"
+	"fmt"
+	"testing"
 )
 
 //https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
@@ -20,43 +20,37 @@ import (
 //
 //输出: [1,3,2]
 
-
-
 type TreeNode struct {
-    Val int
-    Left *TreeNode
-    Right *TreeNode
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
-
 
 func inorderTraversal(root *TreeNode) []int {
-    res = make([]int, 0)
-    help(root)
-    return res
+	res := []int{}
+	help(root, &res)
+	return res
 }
 
-var res []int
-func help(root *TreeNode)  {
-    if root == nil {
-        return
-    }
+func help(root *TreeNode, res *[]int) {
+	if root == nil {
+		return
+	}
 
-    help(root.Left)
-    res = append(res, root.Val)
-    help(root.Right)
+	help(root.Left, res)
+	*res = append(*res, root.Val)
+	help(root.Right, res)
 }
 
-
-
-func TestIno(t *testing.T)  {
-    tree_node := &TreeNode{
-        Val:1,
-        Right:&TreeNode{
-            Val:2,
-            Left:&TreeNode{
-                Val:3,
-            },
-        },
-    }
-    fmt.Println(inorderTraversal(tree_node))
+func TestIno(t *testing.T) {
+	tree_node := &TreeNode{
+		Val: 1,
+		Right: &TreeNode{
+			Val: 2,
+			Left: &TreeNode{
+				Val: 3,
+			},
+		},
+	}
+	fmt.Println(inorderTraversal(tree_node))
 }
