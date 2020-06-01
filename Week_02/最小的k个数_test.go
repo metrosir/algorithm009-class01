@@ -53,5 +53,38 @@ func heapify(root int, length int, arr []int) {
 }
 
 func TestGL(t *testing.T) {
-	fmt.Println(getLeastNumbers([]int{3, 2, 1}, 2))
+	fmt.Println(getLeastNumberss([]int{3, 2, 1}, 2))
+}
+
+//4、5、1、6、2、7、3、8
+//4
+//i+1 : r
+//i-1 :
+func getLeastNumberss(arr []int, k int) []int {
+	if len(arr) < k {
+		return nil
+	}
+
+	res := []int{}
+	for i := 0; i < k; i++ {
+		min := arr[0]
+		for i := 1; i < len(arr); i++ {
+			if min > arr[i] {
+				min = arr[i]
+			}
+		}
+		if i-1 < 0 {
+			//arr = arr[i+2:]
+			fmt.Println(1, arr[i+2:])
+		} else if i+1 == len(arr) {
+			//arr = arr[:len(arr)-1]
+			fmt.Println(2, arr[:len(arr)-1])
+		} else {
+			//arr = append(arr[:i-1], arr[i+1:]...)
+			fmt.Println(3, arr[:i-1], arr[i+1:])
+		}
+
+		res = append(res, min)
+	}
+	return res
 }
