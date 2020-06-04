@@ -23,26 +23,24 @@ import (
 
 func myPow(x float64, n int) float64 {
 
-	if n >= 0 {
+	if n > 0 {
 		return helps(x, n)
 	}
 	return 1 / helps(x, n)
 }
 
 func helps(x float64, n int) float64 {
-	if n == 0 {
+	if n < 1 {
 		return 1
 	}
-
 	y := helps(x, n/2)
 
 	if n%2 == 0 {
 		return y * y
 	}
-
 	return y * y * x
 }
 
 func TestMyPow(t *testing.T) {
-	fmt.Println(myPow(2.1, 3))
+	fmt.Println(myPow(2, 10))
 }
