@@ -23,18 +23,17 @@ import (
 
 func myPow(x float64, n int) float64 {
 
-	if n > 0 {
-		return helps(x, n)
+	if n >= 0 {
+		return helpPow(x, n)
 	}
-	return 1 / helps(x, n)
+	return 1 / helpPow(x, n)
 }
 
-func helps(x float64, n int) float64 {
-	if n < 1 {
+func helpPow(x float64, n int) float64 {
+	if n == 0 {
 		return 1
 	}
-	y := helps(x, n/2)
-
+	y := helpPow(x, n/2)
 	if n%2 == 0 {
 		return y * y
 	}
