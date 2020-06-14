@@ -1,5 +1,10 @@
 package Week_03_test
 
+import (
+	"fmt"
+	"testing"
+)
+
 //https://leetcode-cn.com/problems/subsets/
 
 //给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
@@ -71,3 +76,49 @@ func dfs (step int) {
     }
 }
 */
+
+func subsetss(nums []int) [][]int {
+	res := [][]int{}
+	//opt := []int{}
+	var dfs func(int, []int)
+	dfs = func(idx int, sol []int) {
+		if idx <= len(nums) {
+			tmp := make([]int, len(sol))
+			copy(tmp, sol)
+			res = append(res, tmp)
+		}
+		for i := idx; i < len(nums); i++ {
+			sol = append(sol, nums[i])
+			dfs(i+1, sol)
+			sol = sol[:len(sol)-1]
+		}
+	}
+	dfs(0, []int{})
+	return res
+}
+
+func TestSub(t *testing.T) {
+
+	nums := []int{1, 2, 3}
+	fmt.Println(subset(nums))
+}
+
+func subset(nums []int) [][]int {
+	res := [][]int{}
+	dfs3(&res, 0, []int{}, nums)
+	return res
+}
+
+func dfs3(res *[][]int, idx int, sol []int, nums []int) {
+	if idx <= len(nums) {
+		tmp := make([]int, len(sol))
+		copy(tmp, sol)
+		*res = append(*res, tmp)
+	}
+
+	for i := idx; i < len(nums); i++ {
+		sol = append(sol, nums[i])
+		dfs3(res, i+1, sol, nums)
+		sol = sol[:len(sol)-1]
+	}
+}

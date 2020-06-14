@@ -23,14 +23,10 @@ import (
 //2 2
 //3 111 12 21 3
 //4 1111 121 112 211  22 5
-//n = (n - 1) + (n-2)
-var cache = map[int]int{}
+
+var cache = map[int]int{1: 1, 2: 2}
 
 func climbStairs(n int) int {
-	if n <= 2 {
-		cache[n] = n
-		return n
-	}
 	if _, ok := cache[n]; ok {
 		return cache[n]
 	}
