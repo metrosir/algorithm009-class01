@@ -15,6 +15,7 @@ func findWords(board [][]byte, words []string) []string {
 	for _, w := range words {
 		node := root
 		for _, c := range w {
+			fmt.Println(c, 'a', c-'a')
 			if node.childen[c-'a'] == nil {
 				node.childen[c-'a'] = &Node{}
 			}
